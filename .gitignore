@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DesignPattern/GOFDesignPatterns/.vs
+/DesignPattern/GOFDesignPatterns/AbstractFactory/bin/Debug/netcoreapp2.2
+/DesignPattern/GOFDesignPatterns/GOFDesignPatterns/bin/Debug/netcoreapp2.2
+/DesignPattern/GOFDesignPatterns/GOFDesignPatterns/obj
+/DesignPattern/GOFDesignPatterns/AbstractFactory/obj

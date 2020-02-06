@@ -40,6 +40,7 @@ namespace Prototype.Features
 
         public void ShowColor()
         {
+            Console.WriteLine($"Color name: {ColorName}");
             Console.WriteLine($"R value: " + R);
             Console.WriteLine($"G value: " + G);
             Console.WriteLine($"B value: " + B);

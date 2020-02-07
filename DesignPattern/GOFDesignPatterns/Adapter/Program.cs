@@ -7,6 +7,7 @@ namespace Adapter
     {
         static void Main(string[] args)
         {
+            //Fetches different compound from chemical datbase and displays
             Console.WriteLine("-----------------------------------");
             Compund water = new RichCompound("Water");
             water.Display();

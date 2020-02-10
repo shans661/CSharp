@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyWeight", "FlyWeight\FlyW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Proxy", "Proxy\Proxy.csproj", "{D8DD0F43-0D78-4283-BD35-9164FCD8E072}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChainOfResponsibility", "ChainOfResponsibility\ChainOfResponsibility.csproj", "{B13E5DDF-1EA1-45BF-99B1-15DA75197FC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{D8DD0F43-0D78-4283-BD35-9164FCD8E072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D8DD0F43-0D78-4283-BD35-9164FCD8E072}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D8DD0F43-0D78-4283-BD35-9164FCD8E072}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13E5DDF-1EA1-45BF-99B1-15DA75197FC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13E5DDF-1EA1-45BF-99B1-15DA75197FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13E5DDF-1EA1-45BF-99B1-15DA75197FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13E5DDF-1EA1-45BF-99B1-15DA75197FC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

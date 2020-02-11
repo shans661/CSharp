@@ -33,3 +33,5 @@
 /DesignPattern/GOFDesignPatterns/Proxy/obj
 /DesignPattern/GOFDesignPatterns/ChainOfResponsibility/bin/Debug/netcoreapp2.2
 /DesignPattern/GOFDesignPatterns/ChainOfResponsibility/obj
+/DesignPattern/GOFDesignPatterns/Command/bin/Debug/netcoreapp2.2
+/DesignPattern/GOFDesignPatterns/Command/obj

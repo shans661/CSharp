@@ -35,3 +35,5 @@
 /DesignPattern/GOFDesignPatterns/ChainOfResponsibility/obj
 /DesignPattern/GOFDesignPatterns/Command/bin/Debug/netcoreapp2.2
 /DesignPattern/GOFDesignPatterns/Command/obj
+/DesignPattern/GOFDesignPatterns/Interpreter/bin/Debug/netcoreapp2.2
+/DesignPattern/GOFDesignPatterns/Interpreter/obj

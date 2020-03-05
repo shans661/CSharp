@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.960
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBAccess", "DBAccess\DBAccess.csproj", "{1DECD0BF-B7F2-4B5A-AB77-44D299601238}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.API", "ToDoList.API\ToDoList.API.csproj", "{0B133BDA-8947-4E58-BF60-DB795F6E76A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1DECD0BF-B7F2-4B5A-AB77-44D299601238}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DECD0BF-B7F2-4B5A-AB77-44D299601238}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DECD0BF-B7F2-4B5A-AB77-44D299601238}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DECD0BF-B7F2-4B5A-AB77-44D299601238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B133BDA-8947-4E58-BF60-DB795F6E76A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B133BDA-8947-4E58-BF60-DB795F6E76A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B133BDA-8947-4E58-BF60-DB795F6E76A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B133BDA-8947-4E58-BF60-DB795F6E76A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D6C7888-F52D-4A19-8083-8EB4C0F43E6E}
+	EndGlobalSection
+EndGlobal

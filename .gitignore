@@ -53,3 +53,8 @@
 /DesignPattern/GOFDesignPatterns/Template/obj
 /DesignPattern/GOFDesignPatterns/Visitor/bin/Debug/netcoreapp2.2
 /DesignPattern/GOFDesignPatterns/Visitor/obj
+/ToDoList/DBAccess/DBAccess/bin/Debug/netcoreapp2.2
+/ToDoList/DBAccess/DBAccess/obj
+/ToDoList/DBAccess/ToDoList.API/bin/Debug/netcoreapp2.2
+/ToDoList/DBAccess/.vs
+/ToDoList/DBAccess/ToDoList.API/obj

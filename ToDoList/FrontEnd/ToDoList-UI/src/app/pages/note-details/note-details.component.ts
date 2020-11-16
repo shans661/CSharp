@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Note } from 'src/app/shared/note.model';
+import { NotesServiceService } from 'src/app/shared/notes-service.service';
 
 @Component({
   selector: 'app-note-details',
@@ -7,9 +11,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NoteDetailsComponent implements OnInit {
 
-  constructor() { }
+  note: Note;
+  noteId: number;
+  new: boolean;
+
+  constructor(private noteService: NotesServiceService, private route: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.note = new Note();
+    this.activatedRoute.params.subscribe((params: Params) =>
+    {
+      this.note = new Note();
+      if(params.id != "new")
+      {
+        this.note = this.noteService.getNote(params.id);
+        this.noteId = params.id;
+        this.new = false;
+      } else{
+        this.new = true;
+      }
+    })
   }
 
+  onSubmit(form: NgForm){
+
+    if(this.new)
+    {
+      this.noteService.addNote(form.value);
+      this.route.navigateByUrl('/');
+    } else{
+      this.noteService.updateNote(this.noteId, form.value.title, form.value.body);
+    }
+    
+  }
+
+  onCancel()
+  {
+    this.route.navigateByUrl('/');
+  }
 }

@@ -19,17 +19,21 @@ namespace DBAccess.Configuration
                 .HasColumnName("ID").
                 ValueGeneratedOnAdd();
 
-            builder.Property(x => x.UserName)
+            builder.Property(x => x.UserId)
                 .IsRequired()
-                .HasColumnName("UserName");
+                .HasColumnName("UserId");
 
             builder.Property(x => x.CreationTime)
                 .IsRequired()
                 .HasColumnName("CreationTime");          
 
-            builder.Property(x => x.Item)
+            builder.Property(x => x.Title)
                 .IsRequired()
-                .HasColumnName("Item");
+                .HasColumnName("Title");
+
+            builder.Property(x => x.Body)
+                .IsRequired()
+                .HasColumnName("Body");
 
         }
     }

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace DBAccess.Models
 {
-    public class Item
+    public class NoteItem
     {
-        public string Value { get; set; }
-        public DateTimeOffset CreationTime { get; set; }
+        public string Title { get; set; }
+        public string Body { get; set; }
     }
 }

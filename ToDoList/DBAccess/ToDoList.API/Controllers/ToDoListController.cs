@@ -6,22 +6,26 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DBAccess.Features.ToDoLists;
 using DBAccess.Entities;
+using DBAccess.Models;
 
 namespace ToDoList.API.Controllers
 {
     
-    [Route("api/[controller]")]
     [ApiController]
     public class ToDoListController : ControllerBase
     {
         private IToDoListCommandRepository m_ToDoListCommandRepository;
-        public ToDoListController(IToDoListCommandRepository commandRepositoty)
+        private IToDoListQueryRepository m_ToDoListQueryRepository;
+
+        public ToDoListController(IToDoListCommandRepository commandRepositoty, IToDoListQueryRepository queryRepository)
         {
             m_ToDoListCommandRepository = commandRepositoty;
+            m_ToDoListQueryRepository = queryRepository;
         }
 
-        [HttpPost("todolist")]
-        public async Task<ActionResult<bool>> StoreToDoList(ToDoListEntity entity)
+        [Route("api/todoList")]
+        [HttpPost]
+        public async Task<ActionResult<bool>> StoreListItem(ToDoListEntity entity)
         {
             var response = await m_ToDoListCommandRepository.AddItem(entity);
 
@@ -30,6 +34,47 @@ namespace ToDoList.API.Controllers
                 return StatusCode(201);
             }
             return StatusCode(500);
+        }
+
+        [Route("api/todoList")]
+        [HttpPut]
+        public async Task<ActionResult> UpdateListItem(ToDoListEntity entity)
+        {
+            var response = await m_ToDoListCommandRepository.AddItem(entity);
+
+            if (response)
+            {
+                return StatusCode(201);
+            }
+            return StatusCode(500);
+        }
+
+        [Route("api/AllItems")]
+        [HttpGet]
+        public ActionResult<IList<NoteItem>> GetAllItems(int userId)
+        {
+            var response =  m_ToDoListQueryRepository.GetItems(userId);
+
+            if(response != null)
+            {
+                return Ok(response);
+            }
+
+            return NoContent();
+        }
+
+        [Route("api/Item")]
+        [HttpGet]
+        public ActionResult<NoteItem> GetItem(int userId, int itemId)
+        {
+            var response = m_ToDoListQueryRepository.GetItem(userId, itemId);
+
+            if(response != null)
+            {
+                return Ok(response);
+            }
+
+            return NoContent();
         }
     }
 }

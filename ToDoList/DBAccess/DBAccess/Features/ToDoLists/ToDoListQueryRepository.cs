@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using DBAccess.EFCore;
 using DBAccess.Entities;
 using DBAccess.Models;
@@ -19,23 +20,50 @@ namespace DBAccess.Features.ToDoLists
             m_ToDoListDBContext = contex;
         }
 
-        public IList<Item> GetItems(string userName)
+        public NoteItem GetItem(int userId, int id)
         {
             try
             {
-                m_Logger.LogInformation($"Getitems started for the user {userName}");
+                m_Logger.LogInformation($"Getitem started for the user {userId} and item {id}");
 
-                var items = m_ToDoListDBContext.ToDoList.Where(x => x.UserName == userName)
-                    .Select(x => new Item() { Value = x.Item, CreationTime = x.CreationTime }).ToList();
 
-                m_Logger.LogInformation($"Total items found is {items.Count} for the user {userName}");
+                var item = m_ToDoListDBContext.ToDoList.Where(x => x.UserId == userId && x.Id == id).FirstOrDefault();
+
+                if (item != null)
+                {
+                    return new NoteItem()
+                    {
+                        Title = item.Title,
+                        Body = item.Body
+                    };
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                m_Logger.LogError(ex, $"Exception occurred during getitem for user {userId} and item id {id}");
+                return null;
+            }
+        }
+
+        public IList<NoteItem> GetItems(int userId)
+        {
+            try
+            {
+                m_Logger.LogInformation($"Getitems started for the user {userId}");
+
+                var items = m_ToDoListDBContext.ToDoList.Where(x => x.UserId == userId)
+                    .Select(x => new NoteItem() { Title = x.Title, Body = x.Body }).ToList();
+
+                m_Logger.LogInformation($"Total items found is {items.Count} for the user {userId}");
 
                 return items;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                m_Logger.LogError(ex, $"Exception occurred during getitems for user {userName}");
-                return new List<Item>();
+                m_Logger.LogError(ex, $"Exception occurred during getitems for user {userId}");
+                return new List<NoteItem>();
             }
         }
     }

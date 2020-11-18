@@ -14,7 +14,7 @@ namespace ToDoList.API.Configurations
     {
         public static void AddDefiniteDatabase(this IServiceCollection services)
         {
-            services.AddDbContext<ToDoListDBContext>(x => x.UseNpgsql(GetConnectionString()));
+            services.AddDbContext<ToDoListDBContext>(x => x.UseInMemoryDatabase());
         }
 
         private static string GetConnectionString()

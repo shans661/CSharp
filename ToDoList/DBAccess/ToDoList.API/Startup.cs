@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using ToDoList.API.Configurations;
 using Swashbuckle.AspNetCore.Swagger;
+using DBAccess.Features.ToDoLists;
 
 namespace ToDoList.API
 {
@@ -31,6 +32,7 @@ namespace ToDoList.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDefiniteDatabase();
             services.AddDBWrapperDependency();
+            AddDefiniteDependency(services);
             services.AddSwaggerGen(
                 c =>
             {
@@ -53,6 +55,12 @@ namespace ToDoList.API
             app.UseMvc();
             app.UseSwagger();
             app.UseSwaggerUI(c => { c.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger Adapter Api V1.0"); });
+        }
+
+        private void AddDefiniteDependency(IServiceCollection services)
+        {
+            services.AddScoped<IToDoListCommandRepository, ToDoListCommandRepository>();
+            services.AddScoped<IToDoListQueryRepository, ToDoListQueryRepository>();
         }
     }
 }

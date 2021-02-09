@@ -23,7 +23,7 @@ namespace ToDoList.API.Controllers
             m_ToDoListQueryRepository = queryRepository;
         }
 
-        [Route("api/todoList")]
+        [Route("api/additem")]
         [HttpPost]
         public async Task<ActionResult<bool>> StoreListItem(ToDoListEntity entity)
         {
@@ -36,7 +36,7 @@ namespace ToDoList.API.Controllers
             return StatusCode(500);
         }
 
-        [Route("api/todoList")]
+        [Route("api/updateitem")]
         [HttpPut]
         public async Task<ActionResult> UpdateListItem(ToDoListEntity entity)
         {

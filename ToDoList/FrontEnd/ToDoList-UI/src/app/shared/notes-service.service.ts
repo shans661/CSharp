@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Note } from './note.model';
+import {HttpClient} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,7 @@ import { Note } from './note.model';
 export class NotesServiceService {
 
   notes: Note[] = new Array<Note>();
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   getAllNotes()
   {
@@ -18,7 +20,14 @@ export class NotesServiceService {
   getNote(id: number)
   {
     // Returns the Id of the note
-    return this.notes[id];
+    //return this.notes[id];
+    return this.httpClient.get(environment.apiUrl + 'api/Item',
+    { 
+      params: {
+      userId: 1,
+      itemId: id
+    }
+  });
   }
 
   getId(note : Note)
@@ -31,8 +40,12 @@ export class NotesServiceService {
   {
     let newLenght = this.notes.push(note);
     let index = newLenght - 1;
+    var response = this.httpClient.post(environment.apiUrl + 'api/additem', {
 
-    return index;
+      "title": "shiva",
+      "body": "shans"
+    });
+    return response;
   }
 
   updateNote(id: number, title: string, body: string)

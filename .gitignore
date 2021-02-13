@@ -58,3 +58,8 @@
 /ToDoList/DBAccess/ToDoList.API/bin/Debug/netcoreapp2.2
 /ToDoList/DBAccess/.vs
 /ToDoList/DBAccess/ToDoList.API/obj
+/DatingApp/Backend/DatingApp/DatingApp/bin/Debug/net5.0
+/DatingApp/Backend/DatingApp/.vs/DatingApp
+/DatingApp/Backend/DatingApp/DatingApp/obj
+/DatingApp/Backend/DatingApp/DBWrapper/bin/Debug/netstandard2.0
+/DatingApp/Backend/DatingApp/DBWrapper/obj

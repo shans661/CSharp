@@ -1,15 +1,11 @@
 ﻿using DBWrapper.Entities;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace DatingApp.Controllers
+namespace DatingApp.API.Controllers
 {
-    [ApiController]
-    public class UserController : ControllerBase
+
+    public class UserController : BaseController
     {
 
         private readonly ILogger<UserController> _logger;
@@ -19,21 +15,19 @@ namespace DatingApp.Controllers
             _logger = logger;
         }
 
-        [HttpGet]
-        [Route("api/user")]
         public IEnumerable<User> Get()
         {
             return new List<User>()
             {
                 new User()
                 {
-                    Name = "Shiva",
+                    UserName = "Shiva",
                     Id = 1
                 },
                 new User()
                 {
                     Id = 2,
-                    Name = "Shankara"
+                    UserName = "Shankara"
                 }
             };
         }

@@ -64,3 +64,7 @@
 /DatingApp/Backend/DatingApp/DBWrapper/bin/Debug/netstandard2.0
 /DatingApp/Backend/DatingApp/DBWrapper/obj
 /DatingApp/Backend/DatingApp/.vs/config
+DatingApp/Backend/DatingApp/obj/DatingApp.API.EntityFrameworkCore.targets
+DatingApp/Backend/DatingApp/DatingApp/datingapp.db
+DatingApp/Backend/DatingApp/.vscode/tasks.json
+DatingApp/Backend/DatingApp/.vscode/launch.json

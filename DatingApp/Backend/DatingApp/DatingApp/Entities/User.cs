@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DBWrapper.Entities
+namespace DatingDatingApp.API.Entities
 {
     public class User
     {

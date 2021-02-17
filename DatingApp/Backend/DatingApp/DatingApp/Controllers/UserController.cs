@@ -1,5 +1,4 @@
-﻿using DBWrapper;
-using DBWrapper.Entities;
+﻿using DatingDatingApp.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 namespace DatingApp.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
 
@@ -20,6 +18,7 @@ namespace DatingApp.API.Controllers
             m_Context = context;
         }
 
+        [HttpGet]
         [Route("api/users")]
         public IEnumerable<User> Get()
         {

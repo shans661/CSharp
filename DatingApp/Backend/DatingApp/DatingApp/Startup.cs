@@ -1,10 +1,11 @@
-using DBWrapper;
+using DatingApp.API;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp
 {
@@ -26,7 +27,10 @@ namespace DatingApp
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "DatingApp", Version = "v1" });
             });
-            services.AddEntityFrameworkSqlite().AddDbContext<DataBaseContext>();
+            //services.AddEntityFrameworkSqlite().AddDbContext<DataBaseContext>();
+            services.AddDbContext<DataBaseContext>(options =>{
+                options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+            });
             services.AddCors();
         }
 

@@ -1,10 +1,7 @@
-﻿using DBWrapper.Entities;
+﻿using DatingDatingApp.API.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace DBWrapper
+namespace DatingApp.API
 {
     public class DataBaseContext : DbContext
     {

@@ -1,13 +1,9 @@
-﻿using DBWrapper;
+﻿using DatingDatingApp.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using DBWrapper.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
 {
@@ -15,17 +11,18 @@ namespace DatingApp.API.Controllers
     public class AccountsController : ControllerBase
     {
         internal readonly DataBaseContext m_Context;
-        public AccountsController(DataBaseContext context) 
+        public AccountsController(DataBaseContext context)
         {
             m_Context = context;
         }
 
+        [HttpGet]
         [Route("api/resister")]
         public async Task<ActionResult> Register(string userName, string password)
         {
             var isUserExists = await m_Context.User.AnyAsync(x => x.UserName == userName);
 
-            if(isUserExists)
+            if (isUserExists)
             {
                 return BadRequest();
             }
@@ -41,7 +38,7 @@ namespace DatingApp.API.Controllers
                 await m_Context.User.AddAsync(user);
                 var result = await m_Context.SaveChangesAsync();
 
-                if(result == 1)
+                if (result == 1)
                 {
                     return Accepted();
                 }

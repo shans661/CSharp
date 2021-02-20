@@ -1,4 +1,5 @@
-﻿using DatingDatingApp.API.Entities;
+﻿using DatingApp.DTOs;
+using DatingDatingApp.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
@@ -16,37 +17,59 @@ namespace DatingApp.API.Controllers
             m_Context = context;
         }
 
-        [HttpGet]
-        [Route("api/resister")]
-        public async Task<ActionResult> Register(string userName, string password)
+        [HttpPost]
+        [Route("api/register")]
+        public async Task<ActionResult> Register(RegisterDTO appUser)
         {
-            var isUserExists = await m_Context.User.AnyAsync(x => x.UserName == userName);
+            //Check the user exists
+            if (await IsUserExists(appUser.Username)) return BadRequest("User name exists");
 
-            if (isUserExists)
+            var user = new User();
+            HMACSHA512 encryptor = new HMACSHA512();
+
+            user.UserName = appUser.Username;
+            user.PasswordHash = encryptor.ComputeHash(Encoding.UTF8.GetBytes(appUser.Password));
+            user.PasswordSalt = encryptor.Key;
+
+            await m_Context.User.AddAsync(user);
+            var result = await m_Context.SaveChangesAsync();
+
+            if (result == 1)
             {
-                return BadRequest();
+                return Accepted();
             }
             else
             {
-                var user = new User();
-                HMACSHA512 encryptor = new HMACSHA512();
+                return BadRequest();
+            }
+        }
 
-                user.UserName = userName;
-                user.PasswordHash = encryptor.ComputeHash(Encoding.UTF8.GetBytes(password));
-                user.PasswordSalt = encryptor.Key;
+        [HttpPost]
+        [Route("api/login")]
+        public async Task<ActionResult> Login(LoginDTO appUser)
+        {
+            var user = await m_Context.User.FirstOrDefaultAsync(x => x.UserName == appUser.UserName);
 
-                await m_Context.User.AddAsync(user);
-                var result = await m_Context.SaveChangesAsync();
+            if(user == null) return Unauthorized("User name not exists");
 
-                if (result == 1)
+            var hmac = new HMACSHA512(user.PasswordSalt);
+
+            var computedHash = hmac.ComputeHash(Encoding.ASCII.GetBytes(appUser.Password));
+
+            for(int index =0; index < computedHash.Length; index ++)
+            {
+                if(user.PasswordHash[index] != computedHash[index])
                 {
-                    return Accepted();
-                }
-                else
-                {
-                    return BadRequest();
+                    return Unauthorized("Incorrect password");
                 }
             }
+
+            return Ok("Login successful");
+        }
+
+        private async Task<bool> IsUserExists(string username)
+        {
+            return await m_Context.User.AnyAsync(x => x.UserName == username);
         }
     }
 }

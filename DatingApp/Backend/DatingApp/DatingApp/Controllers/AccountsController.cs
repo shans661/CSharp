@@ -1,4 +1,5 @@
 ﻿using DatingApp.DTOs;
+using DatingApp.Interfaces;
 using DatingDatingApp.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,15 +12,17 @@ namespace DatingApp.API.Controllers
     [ApiController]
     public class AccountsController : ControllerBase
     {
-        internal readonly DataBaseContext m_Context;
-        public AccountsController(DataBaseContext context)
+        private readonly DataBaseContext m_Context;
+        private readonly ITokenService m_TokenService;
+        public AccountsController(DataBaseContext context, ITokenService tokenService)
         {
             m_Context = context;
+            m_TokenService = tokenService;
         }
 
         [HttpPost]
         [Route("api/register")]
-        public async Task<ActionResult> Register(RegisterDTO appUser)
+        public async Task<ActionResult<UserDTO>> Register(RegisterDTO appUser)
         {
             //Check the user exists
             if (await IsUserExists(appUser.Username)) return BadRequest("User name exists");
@@ -28,7 +31,7 @@ namespace DatingApp.API.Controllers
             HMACSHA512 encryptor = new HMACSHA512();
 
             user.UserName = appUser.Username;
-            user.PasswordHash = encryptor.ComputeHash(Encoding.UTF8.GetBytes(appUser.Password));
+            user.PasswordHash = encryptor.ComputeHash(Encoding.ASCII.GetBytes(appUser.Password));
             user.PasswordSalt = encryptor.Key;
 
             await m_Context.User.AddAsync(user);
@@ -36,7 +39,11 @@ namespace DatingApp.API.Controllers
 
             if (result == 1)
             {
-                return Accepted();
+                return new UserDTO()
+                {
+                    Username = user.UserName,
+                    Token = m_TokenService.CreateToken(user)
+                };
             }
             else
             {
@@ -46,7 +53,7 @@ namespace DatingApp.API.Controllers
 
         [HttpPost]
         [Route("api/login")]
-        public async Task<ActionResult> Login(LoginDTO appUser)
+        public async Task<ActionResult<UserDTO>> Login(LoginDTO appUser)
         {
             var user = await m_Context.User.FirstOrDefaultAsync(x => x.UserName == appUser.UserName);
 
@@ -64,7 +71,11 @@ namespace DatingApp.API.Controllers
                 }
             }
 
-            return Ok("Login successful");
+            return new UserDTO()
+            {
+                Username = appUser.UserName,
+                Token = m_TokenService.CreateToken(user)
+            };
         }
 
         private async Task<bool> IsUserExists(string username)

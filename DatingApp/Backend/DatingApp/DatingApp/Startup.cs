@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using DatingApp.Interfaces;
+using DatingApp.Services;
 
 namespace DatingApp
 {
@@ -32,6 +34,8 @@ namespace DatingApp
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddCors();
+
+            services.AddScoped<ITokenService, TokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

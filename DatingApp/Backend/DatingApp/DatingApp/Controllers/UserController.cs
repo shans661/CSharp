@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
 {
@@ -22,19 +24,9 @@ namespace DatingApp.API.Controllers
         [Route("api/users")]
         public IEnumerable<User> Get()
         {
-            return new List<User>()
-            {
-                new User()
-                {
-                    UserName = "Shiva",
-                    Id = 1
-                },
-                new User()
-                {
-                    Id = 2,
-                    UserName = "Shankara"
-                }
-            };
+            var users =  m_Context.User.ToList();
+
+            return users;
         }
     }
 }

@@ -31,7 +31,7 @@ namespace DatingApp.API.Controllers
             HMACSHA512 encryptor = new HMACSHA512();
 
             user.UserName = appUser.Username;
-            user.PasswordHash = encryptor.ComputeHash(Encoding.ASCII.GetBytes(appUser.Password));
+            user.PasswordHash = encryptor.ComputeHash(Encoding.UTF32.GetBytes(appUser.Password));
             user.PasswordSalt = encryptor.Key;
 
             await m_Context.User.AddAsync(user);
@@ -61,7 +61,7 @@ namespace DatingApp.API.Controllers
 
             var hmac = new HMACSHA512(user.PasswordSalt);
 
-            var computedHash = hmac.ComputeHash(Encoding.ASCII.GetBytes(appUser.Password));
+            var computedHash = hmac.ComputeHash(Encoding.UTF32.GetBytes(appUser.Password));
 
             for(int index =0; index < computedHash.Length; index ++)
             {

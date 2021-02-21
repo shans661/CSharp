@@ -21,7 +21,7 @@ namespace DatingApp.Services
         public TokenService(IConfiguration config)
         {
             //Gets the token key from appsettings.development.json
-            m_Key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(config["TokenKey"]));
+            m_Key = new SymmetricSecurityKey(Encoding.UTF32.GetBytes(config["TokenKey"]));
         }
 
         public string CreateToken(User appUser)

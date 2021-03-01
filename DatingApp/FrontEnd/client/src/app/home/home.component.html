@@ -7,5 +7,9 @@
     </div>
 </div>
 <div class="container" *ngIf="isRegisterMode">
-    <app-register></app-register>
+    <div class="row justify-content-center">
+        <div class="col-4">
+            <app-register (cancelRegister)="cancelRegister($event)"></app-register>
+        </div>
+    </div> 
 </div>

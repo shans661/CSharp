@@ -6,9 +6,9 @@
          [(ngModel)]="userModel.username" placeholder="Username">
     </div>
     <div class="form-group">
-        <input type="text" class="form-control" name="password"
+        <input type="password" class="form-control" name="password"
         [(ngModel)]="userModel.password" placeholder="password">
     </div>
     <button type="submit" class="btn btn-primary mr-5">Submit</button>
-    <button type="button" class="btn btn-info mr-5">Cancel</button>
+    <button type="button" class="btn btn-info mr-5" (click)="cancelClick()">Cancel</button>
 </form>

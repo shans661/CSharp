@@ -22,4 +22,9 @@ export class HomeComponent implements OnInit {
     console.log("Feature under implementation");
   }
 
+  cancelRegister(event: boolean)
+  {
+      this.isRegisterMode = false;
+  }
+
 }

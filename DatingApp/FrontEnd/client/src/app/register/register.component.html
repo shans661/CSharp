@@ -9,6 +9,6 @@
         <input type="password" class="form-control" name="password"
         [(ngModel)]="userModel.password" placeholder="password">
     </div>
-    <button type="submit" class="btn btn-primary mr-5">Submit</button>
+    <button type="submit" class="btn btn-primary mr-5" (click)="register()">Submit</button>
     <button type="button" class="btn btn-info mr-5" (click)="cancelClick()">Cancel</button>
 </form>

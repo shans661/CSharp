@@ -22,7 +22,7 @@ namespace DatingApp.API.Controllers
 
         [HttpPost]
         [Route("api/register")]
-        public async Task<ActionResult<UserDTO>> Register(RegisterDTO appUser)
+        public async Task<ActionResult> Register(RegisterDTO appUser)
         {
             //Check the user exists
             if (await IsUserExists(appUser.Username)) return BadRequest("User name exists");
@@ -39,11 +39,7 @@ namespace DatingApp.API.Controllers
 
             if (result == 1)
             {
-                return new UserDTO()
-                {
-                    Username = user.UserName,
-                    Token = m_TokenService.CreateToken(user)
-                };
+                return StatusCode(201);
             }
             else
             {

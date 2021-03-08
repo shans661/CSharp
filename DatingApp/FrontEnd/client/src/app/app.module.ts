@@ -10,13 +10,21 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MemberListComponent } from './members/member-list/member-list.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
+import { ListsComponent } from './members/lists/lists.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    MessagesComponent,
+    MemberListComponent,
+    MemberDetailComponent,
+    ListsComponent
   ],
   imports: [
     BrowserModule,

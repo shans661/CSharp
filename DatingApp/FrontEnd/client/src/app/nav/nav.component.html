@@ -5,20 +5,22 @@
     </button>
     <a class="navbar-brand" href="#">Dating App</a>
     <div class="navbar-collapse collapse" id="navbarCollapse" *ngIf="accountservice.currentUser$ | async">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Matches</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Lists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Messages</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" (click)="logout()" href="#">Logout</a>
-            </li>
-        </ul>
+        <ng-container>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink='/members' routerLinkActive='active'>Matches</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/lists" routerLinkActive='active'>Lists</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/messages" routerLinkActive='active'>Messages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logout()" href="#">Logout</a>
+                </li>
+            </ul>
+        </ng-container>
     </div>
     <div class="dropdown" *ngIf="accountservice.currentUser$ | async" dropdown>
         <a class="dropdown-toggle text-light" dropdownToggle>Welcome user</a>

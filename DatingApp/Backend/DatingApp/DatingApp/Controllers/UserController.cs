@@ -25,7 +25,8 @@ namespace DatingApp.API.Controllers
         public IEnumerable<User> Get()
         {
             var users =  m_Context.User.ToList();
-
+            users = null;
+            var user1 = users[0];
             return users;
         }
     }

@@ -22,12 +22,19 @@ namespace DatingApp.API.Controllers
 
         [HttpGet]
         [Route("api/users")]
-        public IEnumerable<User> Get()
+        public IEnumerable<AppUser> Get()
         {
             var users =  m_Context.User.ToList();
             users = null;
             var user1 = users[0];
             return users;
+        }
+
+        [HttpGet]
+        [Route("api/error")]
+        public ActionResult Error()
+        {
+            return StatusCode(404);
         }
     }
 }

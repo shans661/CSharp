@@ -24,7 +24,7 @@ namespace DatingApp.Services
             m_Key = new SymmetricSecurityKey(Encoding.UTF32.GetBytes(config["TokenKey"]));
         }
 
-        public string CreateToken(User appUser)
+        public string CreateToken(AppUser appUser)
         {
             //Jwt has 3 sections
             //1. Header holds alg, type

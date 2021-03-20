@@ -27,7 +27,7 @@ namespace DatingApp.API.Controllers
             //Check the user exists
             if (await IsUserExists(appUser.Username)) return BadRequest("User name exists");
 
-            var user = new User();
+            var user = new AppUser();
             HMACSHA512 encryptor = new HMACSHA512();
 
             user.UserName = appUser.Username;

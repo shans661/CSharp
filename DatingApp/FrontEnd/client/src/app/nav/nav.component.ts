@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -40,6 +41,18 @@ export class NavComponent implements OnInit {
   {
     this.accountservice.logout();
     this.route.navigateByUrl('/');
+  }
+
+  error()
+  {
+    this.accountservice.error().subscribe(response => 
+    {
+      console.log(response);
+    },
+    error =>
+    {
+      console.log(error);
+    });
   }
 
 }

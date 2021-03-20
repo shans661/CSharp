@@ -41,6 +41,19 @@ export class AccountService {
       ));
   }
 
+  error()
+  {
+      return this.http.get(this.baseUrl + 'error').pipe(
+        map(response =>
+          {
+            if(response)
+            {
+              return response;
+            }
+          }
+      ));
+  }
+
   setCurrentUser(user: User)
   {
     this.currentUserSource.next(user);

@@ -6,6 +6,7 @@ import { ListsComponent } from './members/lists/lists.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
+import {NotFoundComponent} from './errors/not-found/not-found.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -15,7 +16,9 @@ children: [
 {path:'members/:id', component: MemberDetailComponent},
 {path: 'lists', component: ListsComponent},
 {path: 'messages', component: MessagesComponent},
-{path: '**', component: HomeComponent, pathMatch:'full'}]}
+{path: '**', component: NotFoundComponent, pathMatch:'full'}]},
+
+{path: 'not-found', component: NotFoundComponent}
 ];
 
 @NgModule({

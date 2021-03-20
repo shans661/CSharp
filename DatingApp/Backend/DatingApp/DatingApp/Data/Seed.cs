@@ -31,6 +31,8 @@ namespace DatingApp.Data
 
                 context.User.Add(user);
             }
+
+            await context.SaveChangesAsync();
         }
     }
 }

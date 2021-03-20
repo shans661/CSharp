@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using DatingApp.API;
 using DatingApp.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -22,7 +23,7 @@ namespace DatingApp
             try
             {
                 var dbContext = services.GetRequiredService<DataBaseContext>();
-                //await dbContext.Database.MigrateAsync();
+                await dbContext.Database.MigrateAsync();
                 await Seed.SeedUsers(dbContext);
             }
             catch(Exception ex)

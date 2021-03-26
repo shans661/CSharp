@@ -34,7 +34,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpGet]
-        [Route("api/username")]
+        [Route("api/username/{username}")]
         public async Task<ActionResult<MemberDTO>> GetUserByName(string username)
         {
             var user = await m_UserRepository.GetMemberByNameAsync(username);

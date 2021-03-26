@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Member } from 'src/app/Models/member';
 
 @Component({
   selector: 'app-member-card',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MemberCardComponent implements OnInit {
 
+  @Input() member: Member;
   constructor() { }
 
   ngOnInit(): void {

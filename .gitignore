@@ -68,3 +68,4 @@ DatingApp/Backend/DatingApp/obj/DatingApp.API.EntityFrameworkCore.targets
 DatingApp/Backend/DatingApp/DatingApp/datingapp.db
 DatingApp/Backend/DatingApp/.vscode/tasks.json
 DatingApp/Backend/DatingApp/.vscode/launch.json
+DatingApp/Backend/DatingApp/DatingApp/appsettings.json

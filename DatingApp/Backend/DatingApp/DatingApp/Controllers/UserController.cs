@@ -5,7 +5,7 @@ using DatingDatingApp.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
-using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
@@ -55,6 +55,24 @@ namespace DatingApp.API.Controllers
         public ActionResult Error()
         {
             return StatusCode(404);
+        }
+
+        [HttpPut]
+        [Route("api/update")]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDTO member)
+        {
+            var user = await m_UserRepository.GetUserByNameAsync(member.userName);
+
+            m_Mapper.Map(member, user);
+
+            m_UserRepository.Update(user);
+
+            if(await m_UserRepository.SaveAllAsync())
+            {
+                return NoContent();
+            }
+
+            return BadRequest("User update failed");
         }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using DatingApp.DTOs;
+using DatingApp.Extensions;
 using DatingApp.Interfaces;
 using DatingDatingApp.API.Entities;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -17,12 +20,14 @@ namespace DatingApp.API.Controllers
         private readonly ILogger<UserController> _logger;
         internal readonly IUserRepository m_UserRepository;
         internal readonly IMapper m_Mapper;
+        private readonly IPhotoService m_PhotoService;
         public UserController(ILogger<UserController> logger, IUserRepository userRepository,
-        IMapper mapper)
+        IMapper mapper, IPhotoService photoService)
         {
             _logger = logger;
             m_UserRepository = userRepository;
             m_Mapper = mapper;
+            m_PhotoService = photoService;
         }
 
         [HttpGet]
@@ -34,7 +39,7 @@ namespace DatingApp.API.Controllers
         }
 
         [HttpGet]
-        [Route("api/username/{username}")]
+        [Route("api/username/{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDTO>> GetUserByName(string username)
         {
             var user = await m_UserRepository.GetMemberByNameAsync(username);
@@ -73,6 +78,63 @@ namespace DatingApp.API.Controllers
             }
 
             return BadRequest("User update failed");
+        }
+
+        [HttpPost]
+        [Route("api/addphoto")]
+        public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
+        {
+            var user = await m_UserRepository.GetUserByNameAsync(User.GetUsername());
+            var result = await m_PhotoService.AddPhotoAsync(file);
+
+            if(result.Error !=null)
+            {
+                return BadRequest();
+            }
+
+            var photo = new Photo()
+            {
+                Url = result.SecureUrl.AbsoluteUri,
+                PublicId = result.PublicId
+            };
+
+            if(user.Photos.Count == 0)
+            {
+                photo.IsMain = true;
+            }
+
+            user.Photos.Add(photo);
+
+            if(await m_UserRepository.SaveAllAsync())
+            {
+                return CreatedAtRoute("GetUser", new {username = user}, m_Mapper.Map<PhotoDTO>(photo));
+            }
+
+            return BadRequest("Problem adding photo");
+        }
+    
+        [HttpPut]
+        [Route("api/set-main-photo")]
+        public async Task<ActionResult> SetMainPhoto(int photoId)
+        {
+            var user = await m_UserRepository.GetUserByNameAsync(User.GetUsername());
+
+            var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+
+            if(photo.IsMain) return BadRequest("This photo is already main");
+
+            var currentMainPhoto = user.Photos.FirstOrDefault(x => x.IsMain);
+
+            if(currentMainPhoto != null) currentMainPhoto.IsMain = false;
+
+            photo.IsMain = true;
+
+            if(await m_UserRepository.SaveAllAsync())
+            {
+                return NoContent();
+            }
+
+            return BadRequest("Failed to set main photo");
         }
     }
 }

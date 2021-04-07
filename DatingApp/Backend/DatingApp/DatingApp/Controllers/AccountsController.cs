@@ -3,6 +3,7 @@ using DatingApp.Interfaces;
 using DatingDatingApp.API.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,7 +71,8 @@ namespace DatingApp.API.Controllers
             return new UserDTO()
             {
                 Username = appUser.UserName,
-                Token = m_TokenService.CreateToken(user)
+                Token = m_TokenService.CreateToken(user),
+                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
             };
         }
 

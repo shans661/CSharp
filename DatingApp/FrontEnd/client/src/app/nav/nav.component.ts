@@ -15,14 +15,15 @@ export class NavComponent implements OnInit {
   constructor(public accountservice: AccountService, private route: Router,
     private toastr: ToastrService) { }
   model: any = {};
+  user:User;
 
   ngOnInit(): void {
   }
 
   setCurrentUser()
   {
-    const user: User = JSON.parse(localStorage.getItem("user"));
-    this.accountservice.setCurrentUser(user);
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.accountservice.setCurrentUser(this.user);
   }
   login()
   {

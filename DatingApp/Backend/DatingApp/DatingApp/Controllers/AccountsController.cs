@@ -52,7 +52,7 @@ namespace DatingApp.API.Controllers
         [Route("api/login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO appUser)
         {
-            var user = await m_Context.User.FirstOrDefaultAsync(x => x.UserName == appUser.UserName);
+            var user = await m_Context.User.Include(x => x.Photos).FirstOrDefaultAsync(x => x.UserName == appUser.UserName);
 
             if(user == null) return Unauthorized("User name not exists");
 

@@ -27,7 +27,7 @@
     </div>
 
     <div class="dropdown" *ngIf="accountservice.currentUser$ | async" dropdown>
-        <img src={{user.photoUrl}} alt={{user.username}} />
+        <img class="userimg" src={{user.photoUrl}} alt={{user.username}} />
         <a class="dropdown-toggle text-light" dropdownToggle>Welcome {{user.username}}</a>
         <div class="dropdown-menu" *dropdownMenu>
             <a class="dropdown-item" routerLink='member/edit'>Edit Profile</a>

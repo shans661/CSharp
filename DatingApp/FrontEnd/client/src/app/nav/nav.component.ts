@@ -18,6 +18,7 @@ export class NavComponent implements OnInit {
   user:User;
 
   ngOnInit(): void {
+    this.setCurrentUser();
   }
 
   setCurrentUser()

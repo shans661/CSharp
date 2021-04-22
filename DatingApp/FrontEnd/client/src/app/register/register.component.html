@@ -17,7 +17,7 @@
     <app-text-input [formControl]='registerForm.controls["country"]' [label]='"Country"'></app-text-input>
     <app-text-input [formControl]='registerForm.controls["password"]' [label]='"Password"'></app-text-input>
     <app-text-input [formControl]='registerForm.controls["confirmpassword"]' [label]='"ConfirmPassword"'></app-text-input>
-    <button type="submit" class="btn btn-primary mr-5" (click)="register()">Submit</button>
+    <button [disabled]='!registerForm.valid' type="submit" class="btn btn-primary mr-5" (click)="register()">Register</button>
     <button type="button" class="btn btn-info mr-5" (click)="cancelClick()">Cancel</button>
 </form>
 

@@ -1,4 +1,5 @@
-﻿using DatingApp.DTOs;
+﻿using AutoMapper;
+using DatingApp.DTOs;
 using DatingApp.Interfaces;
 using DatingDatingApp.API.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -15,10 +16,13 @@ namespace DatingApp.API.Controllers
     {
         private readonly DataBaseContext m_Context;
         private readonly ITokenService m_TokenService;
-        public AccountsController(DataBaseContext context, ITokenService tokenService)
+        private readonly IMapper m_Mapper;
+        
+        public AccountsController(DataBaseContext context, ITokenService tokenService, IMapper mapper)
         {
             m_Context = context;
             m_TokenService = tokenService;
+            m_Mapper = mapper;
         }
 
         [HttpPost]
@@ -28,7 +32,7 @@ namespace DatingApp.API.Controllers
             //Check the user exists
             if (await IsUserExists(appUser.Username)) return BadRequest("User name exists");
 
-            var user = new AppUser();
+            var user = m_Mapper.Map<AppUser>(appUser);
             HMACSHA512 encryptor = new HMACSHA512();
 
             user.UserName = appUser.Username;
@@ -72,7 +76,8 @@ namespace DatingApp.API.Controllers
             {
                 Username = appUser.UserName,
                 Token = m_TokenService.CreateToken(user),
-                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url
+                PhotoUrl = user.Photos?.FirstOrDefault(x => x.IsMain)?.Url,
+                KnownAs = user.KnownAs
             };
         }
 

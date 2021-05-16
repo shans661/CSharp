@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using DatingApp.API;
+using DatingApp.API.Helpers;
 using DatingApp.DTOs;
 using DatingApp.Interfaces;
 using DatingDatingApp.API.Entities;
@@ -20,10 +21,10 @@ namespace DatingApp.Repository
             m_Mapper = mapper;
         }
 
-        public async Task<IEnumerable<MemberDTO>> GetAllMembersAsync()
+        public async Task<PagedList<MemberDTO>> GetAllMembersAsync(UserParams userParams)
         {
-            var members = await m_Context.User.ProjectTo<MemberDTO>(m_Mapper.ConfigurationProvider).ToListAsync();
-            return members;
+            var query = m_Context.User.ProjectTo<MemberDTO>(m_Mapper.ConfigurationProvider).AsNoTracking();
+            return await PagedList<MemberDTO>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }
 
         public async Task<IEnumerable<AppUser>> GetAllUsersAsync()

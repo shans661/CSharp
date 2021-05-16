@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DatingApp.API.Extensions;
+using DatingApp.API.Helpers;
 using DatingApp.DTOs;
 using DatingApp.Extensions;
 using DatingApp.Interfaces;
@@ -32,9 +34,12 @@ namespace DatingApp.API.Controllers
 
         [HttpGet]
         [Route("api/users")]
-        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers()
+        public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {
-            var users = await m_UserRepository.GetAllMembersAsync();
+            var users = await m_UserRepository.GetAllMembersAsync(userParams);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPage);
+
             return Ok(users);
         }
 

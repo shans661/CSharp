@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
@@ -23,7 +25,16 @@ namespace DatingApp.Repository
 
         public async Task<PagedList<MemberDTO>> GetAllMembersAsync(UserParams userParams)
         {
-            var query = m_Context.User.ProjectTo<MemberDTO>(m_Mapper.ConfigurationProvider).AsNoTracking();
+            var minAge = DateTime.Now.AddYears(-userParams.MinAge - 1);
+            var maxAge = DateTime.Now.AddYears(-userParams.MaxAge);
+
+            //Filter the data skip current user and opposite gender
+            var query = m_Context.User.Where(x => x.UserName != userParams.CurrentUserName
+            && x.Gender == userParams.Gender
+            && x.DateOfBirth <= minAge
+            && x.DateOfBirth >= maxAge)
+                .ProjectTo<MemberDTO>(m_Mapper.ConfigurationProvider).AsNoTracking();
+               
             return await PagedList<MemberDTO>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }
 

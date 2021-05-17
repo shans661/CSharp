@@ -36,6 +36,14 @@ namespace DatingApp.API.Controllers
         [Route("api/users")]
         public async Task<ActionResult<IEnumerable<MemberDTO>>> GetUsers([FromQuery]UserParams userParams)
         {
+            var user = await m_UserRepository.GetMemberByNameAsync(User.GetUsername());
+            userParams.CurrentUserName = user.UserName;
+
+            if (string.IsNullOrEmpty(userParams.Gender))
+            {
+                userParams.Gender = user.Gender == "male" ? "female" : "male";
+            }
+            
             var users = await m_UserRepository.GetAllMembersAsync(userParams);
 
             Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPage);

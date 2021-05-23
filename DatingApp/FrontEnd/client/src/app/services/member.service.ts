@@ -34,6 +34,9 @@ export class MemberService {
     {
       params = params.append('pageNumber', userParams.pageNumber.toString());
       params = params.append('pageSize', userParams.pageSize.toString());
+      params = params.append('gender', userParams.gender.toString());
+      params = params.append('minAge', userParams.minAge.toString());
+      params = params.append('maxAge', userParams.maxAge.toString());
     }
     return this.httpClient.get<Member[]>(environment.apiUrl + "users", {observe : 'response', params}).pipe(
       map(response => {

@@ -12,6 +12,8 @@ export class AccountService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
 
+  currentUser: any;
+
   constructor(private http: HttpClient) { }
 
   login(model:any)
@@ -56,12 +58,14 @@ export class AccountService {
   setCurrentUser(user: User)
   {
     localStorage.setItem("user", JSON.stringify(user));
+    this.currentUser = user;
     this.currentUserSource.next(user);
   }
 
   logout()
   {
     localStorage.removeItem("user");
+    this.currentUser = null;
     this.currentUserSource.next(null);
   }
 }

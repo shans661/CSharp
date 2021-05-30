@@ -21,6 +21,15 @@
 
         <button class="btn btn-primary" type="submit" (click)='loadMembers()'>Apply</button>
         <button class="btn btn-info" type="submit" (click)='resetFilter()'>Reset</button>
+
+        <div class="form-group px-3">
+            <label>Orber by:</label>
+            <select name="orderBy" class="form-control ml-1" style="width: 130px;" 
+            [(ngModel)]='userParams.orderBy'
+            (ngModelChange)='loadMembers()'>
+                <option *ngFor='let orderByItem of orderByList' [value]='orderByItem.value'>{{orderByItem.display}}</option>
+            </select>
+        </div>
     </form>
 </div>
 

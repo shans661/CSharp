@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DatingApp.API.Helpers;
 using DatingApp.DTOs;
 using DatingApp.Interfaces;
 using DatingDatingApp.API.Entities;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]
     public class AccountsController : ControllerBase
     {

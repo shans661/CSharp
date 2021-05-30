@@ -34,7 +34,8 @@ namespace DatingApp.Services
             //Payload creation
             var claims = new List<Claim>()
             {
-                new Claim(JwtRegisteredClaimNames.NameId, appUser.UserName)
+                new Claim(JwtRegisteredClaimNames.NameId, appUser.Id.ToString()),
+                new Claim(JwtRegisteredClaimNames.UniqueName, appUser.UserName)
             };
 
             var creds = new SigningCredentials(m_Key, SecurityAlgorithms.HmacSha512Signature);

@@ -1,4 +1,5 @@
 using DatingApp.API;
+using DatingApp.API.Helpers;
 using DatingApp.Helpers;
 using DatingApp.Interfaces;
 using DatingApp.Repository;
@@ -29,6 +30,7 @@ namespace DatingApp.Extensions
             services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
+            services.AddScoped<LogUserActivity>();
 
             return services;
         }

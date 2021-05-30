@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 
 namespace DatingApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [ApiController]
     public class UserController : ControllerBase
     {

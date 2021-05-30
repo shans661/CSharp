@@ -26,6 +26,7 @@ export class MemberListComponent implements OnInit {
   pagination: Pagination;
   userParams: UserParams;
   genderList = [{ value: 'male', display: 'Male' }, { value: 'female', display: 'Female' }];
+  orderByList = [{ value: 'lastActive', display: 'Last Active' }, { value: 'created', display: 'Created At' }];
   user: User;
 
 

@@ -34,6 +34,13 @@ namespace DatingApp.Repository
             && x.DateOfBirth <= minAge
             && x.DateOfBirth >= maxAge)
                 .ProjectTo<MemberDTO>(m_Mapper.ConfigurationProvider).AsNoTracking();
+
+            //Shorthand switch operation
+            query = userParams.OrderBy switch
+            {
+                "created" => query.OrderByDescending(x => x.Created),
+                _ => query.OrderByDescending(x => x.LastActive)
+            };
                
             return await PagedList<MemberDTO>.CreateAsync(query, userParams.PageNumber, userParams.PageSize);
         }

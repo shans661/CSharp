@@ -14,6 +14,7 @@ export class MemberService {
 
   members: Member[] = [];
   paginatedResult : PaginatedResult<Member[]> = new PaginatedResult<Member[]>();
+  memberCache = new Map();
 
   constructor(private httpClient: HttpClient) { }
 
@@ -28,6 +29,14 @@ export class MemberService {
   }
 
   getMembers(userParams: UserParams){
+
+    var response = this.memberCache.get(Object.values(userParams).join('-'));
+
+    if(response)
+    {
+      return of(response);
+    }
+
     let params = new HttpParams();
 
     if(userParams)
@@ -46,7 +55,7 @@ export class MemberService {
         {
           this.paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
         }
-
+        this.memberCache.set(Object.values(userParams).join('-'), {...this.paginatedResult});
         return this.paginatedResult;
       })
     );

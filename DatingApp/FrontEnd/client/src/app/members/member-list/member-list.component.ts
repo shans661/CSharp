@@ -15,11 +15,8 @@ import { MemberService } from 'src/app/services/member.service';
 })
 export class MemberListComponent implements OnInit {
 
-  constructor(private memberService: MemberService, private accountService: AccountService) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe(response => {
-      this.user = response,
-        this.userParams = new UserParams(response);
-    })
+  constructor(private memberService: MemberService) {
+    this.userParams = memberService.getUserParams();
   }
 
   members: Member[];
@@ -35,6 +32,7 @@ export class MemberListComponent implements OnInit {
   }
 
   loadMembers() {
+    this.memberService.setUserparams(this.userParams);
     this.memberService.getMembers(this.userParams).subscribe(response => {
       this.members = response.result;
       this.pagination = response.pagination;
@@ -47,7 +45,7 @@ export class MemberListComponent implements OnInit {
   }
 
   resetFilter() {
-    this.userParams = new UserParams(this.user);
+    this.userParams = this.memberService.resetUserParam();
     this.loadMembers();
   }
 

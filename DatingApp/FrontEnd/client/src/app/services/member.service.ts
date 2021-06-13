@@ -89,4 +89,12 @@ export class MemberService {
       })
     );
   }
+
+  addLike(username: string) {
+    return this.httpClient.post(environment.apiUrl + "like/" + username, {});
+  }
+
+  getLikes(predicte: string) {
+    return this.httpClient.get<Partial<Member[]>>(environment.apiUrl + "like?predicate=" + predicte);
+  }
 }

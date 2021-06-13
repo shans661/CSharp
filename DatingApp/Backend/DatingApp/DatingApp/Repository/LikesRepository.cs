@@ -26,7 +26,7 @@ namespace DatingApp.Services
             return await m_Context.Likes.FindAsync(sourceUserId, likeUserId);
         }
 
-        public async Task<IEnumerable<LikeDTO>> GetUserLikes(LikesParams likesParams)
+        public async Task<PagedList<LikeDTO>> GetUserLikes(LikesParams likesParams)
         {
             var users = m_Context.User.OrderBy(x => x.UserName).AsQueryable();
             var likes = m_Context.Likes.AsQueryable();

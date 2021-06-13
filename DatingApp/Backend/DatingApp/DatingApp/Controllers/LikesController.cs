@@ -7,6 +7,7 @@ using DatingApp.Interfaces;
 using DatingDatingApp.API.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using DatingApp.API.Extensions;
 
 namespace DatingApp.Controllers
 {
@@ -55,6 +56,8 @@ namespace DatingApp.Controllers
         {
             likesParams.UserId = User.GetUserId();
             var users = await m_LikesRepository.GetUserLikes(likesParams);
+
+            Response.AddPaginationHeader(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPage);
 
             return Ok(users);
         }

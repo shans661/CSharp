@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DatingApp.API.Entities;
 using DatingApp.Extensions;
 
 namespace DatingDatingApp.API.Entities
@@ -26,5 +27,8 @@ namespace DatingDatingApp.API.Entities
 
         public ICollection<UserLike> LikedByUsers { get; set; }
         public ICollection<UserLike> LikedUsers { get; set; }
+
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
     }
 }

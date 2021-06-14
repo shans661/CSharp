@@ -1,4 +1,5 @@
-﻿using DatingDatingApp.API.Entities;
+﻿using DatingApp.API.Entities;
+using DatingDatingApp.API.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DatingApp.API
@@ -12,6 +13,7 @@ namespace DatingApp.API
         public DbSet<AppUser> User { get; set; }
         public DbSet<Photo> Photo { get; set; }
         public DbSet<UserLike> Likes { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,6 +33,18 @@ namespace DatingApp.API
             .WithMany(x => x.LikedByUsers)
             .HasForeignKey(x => x.SourceUserId)
             .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Message>()
+                .HasOne(x => x.Sender)
+                .WithMany(x => x.MessagesSent)
+                .HasForeignKey(x => x.SenderId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Message>()
+                .HasOne(x => x.Recipient)
+                .WithMany(x => x.MessagesReceived)
+                .HasForeignKey(x => x.RecipientId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

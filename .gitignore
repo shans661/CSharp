@@ -70,3 +70,10 @@ DatingApp/Backend/DatingApp/.vscode/tasks.json
 DatingApp/Backend/DatingApp/.vscode/launch.json
 DatingApp/Backend/DatingApp/DatingApp/appsettings.json
 DatingApp/Backend/DatingApp/DatingApp/appsettings.json
+/.vs
+/DatingApp/Backend/DatingApp/DatingApp/bin/Release/net5.0
+/DatingApp/Backend/DatingApp/DatingApp/Properties/PublishProfiles
+*.user
+/ZTM_ProblemSolving/ProblemSolving_ZTM/.vs/ProblemSolving_ZTM
+/ZTM_ProblemSolving/ProblemSolving_ZTM/bin/Debug/net6.0
+/ZTM_ProblemSolving/ProblemSolving_ZTM/obj

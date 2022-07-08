@@ -24,5 +24,8 @@
 //Console.WriteLine($"{myStack.Top()}"); 
 //Console.WriteLine($"{myStack.Empty()}"); 
 
-RemoveDuplicatesFromArray removeDuplicatesFromArray = new RemoveDuplicatesFromArray();
-Console.WriteLine($"{removeDuplicatesFromArray.RemoveDuplicates(new int[] { 1, 1,2,2,3,3 })}");
+//RemoveDuplicatesFromArray removeDuplicatesFromArray = new RemoveDuplicatesFromArray();
+//Console.WriteLine($"{removeDuplicatesFromArray.RemoveDuplicates(new int[] { 1, 1,2,2,3,3 })}");
+
+RomanToIntConversion romanToIntConversion = new RomanToIntConversion();
+Console.WriteLine($"{romanToIntConversion.RomanToInt("XLIV")}");

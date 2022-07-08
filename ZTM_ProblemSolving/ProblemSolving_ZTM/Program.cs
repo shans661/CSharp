@@ -16,10 +16,13 @@
 //linkedList.ShowAll();
 
 // Implement stack using single queue
-MyStack myStack = new MyStack();
-myStack.Push(1);
-myStack.Push(2);
-myStack.Push(3);
-Console.WriteLine($"{myStack.Pop()}"); 
-Console.WriteLine($"{myStack.Top()}"); 
-Console.WriteLine($"{myStack.Empty()}"); 
+//MyStack myStack = new MyStack();
+//myStack.Push(1);
+//myStack.Push(2);
+//myStack.Push(3);
+//Console.WriteLine($"{myStack.Pop()}"); 
+//Console.WriteLine($"{myStack.Top()}"); 
+//Console.WriteLine($"{myStack.Empty()}"); 
+
+RemoveDuplicatesFromArray removeDuplicatesFromArray = new RemoveDuplicatesFromArray();
+Console.WriteLine($"{removeDuplicatesFromArray.RemoveDuplicates(new int[] { 1, 1,2,2,3,3 })}");

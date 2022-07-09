@@ -14,16 +14,16 @@ namespace ProblemSolving_ZTM
 
             char previousChar = ' ';
             int result = 0;
-            foreach(char item in inputArray)
+            foreach (char item in inputArray)
             {
-                switch(item)
+                switch (item)
                 {
                     case 'I':
                         result += 1;
                         previousChar = 'I';
                         break;
                     case 'V':
-                        if(previousChar == 'I')
+                        if (previousChar == 'I')
                         {
                             result += 3;
                         }
@@ -89,6 +89,39 @@ namespace ProblemSolving_ZTM
                         previousChar = 'M';
                         break;
                 }
+            }
+
+            return result;
+        }
+
+        public int RomanToIntHashMap(string s)
+        {
+            Dictionary<char, int> keyValuePairs = new Dictionary<char, int>()
+            {
+                { 'I', 1 },
+                {'V', 5 },
+                {'X', 10 },
+                {'L', 50 },
+                {'C', 100 },
+                {'D', 500 },
+                {'M', 1000 },
+            };
+
+            char[] inputArray = s.ToArray();
+            int result = 0;
+            char previousChar = ' ';
+            foreach (char item in inputArray)
+            {
+                if(previousChar == ' ' || keyValuePairs[previousChar] >= keyValuePairs[item] )
+                {
+                    result += keyValuePairs[item];
+                }
+                else
+                {
+                    result += keyValuePairs[item] - (keyValuePairs[previousChar] * 2);
+                }
+
+                previousChar = item;
             }
 
             return result;

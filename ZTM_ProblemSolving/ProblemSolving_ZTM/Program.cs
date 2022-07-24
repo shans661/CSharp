@@ -27,5 +27,9 @@
 //RemoveDuplicatesFromArray removeDuplicatesFromArray = new RemoveDuplicatesFromArray();
 //Console.WriteLine($"{removeDuplicatesFromArray.RemoveDuplicates(new int[] { 1, 1,2,2,3,3 })}");
 
-RomanToIntConversion romanToIntConversion = new RomanToIntConversion();
-Console.WriteLine($"{romanToIntConversion.RomanToIntHashMap("XLIV")}");
+//RomanToIntConversion romanToIntConversion = new RomanToIntConversion();
+//Console.WriteLine($"{romanToIntConversion.RomanToIntHashMap("XLIV")}");
+
+Factorial factorial = new Factorial();
+Console.WriteLine($"{factorial.FindFactorialIterative(11)}");
+ Console.WriteLine($"{factorial.FindFactorialRecursive(11)}");

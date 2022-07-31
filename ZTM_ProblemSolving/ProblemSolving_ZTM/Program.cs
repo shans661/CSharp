@@ -30,6 +30,9 @@
 //RomanToIntConversion romanToIntConversion = new RomanToIntConversion();
 //Console.WriteLine($"{romanToIntConversion.RomanToIntHashMap("XLIV")}");
 
-Factorial factorial = new Factorial();
-Console.WriteLine($"{factorial.FindFactorialIterative(11)}");
- Console.WriteLine($"{factorial.FindFactorialRecursive(11)}");
+//Factorial factorial = new Factorial();
+//Console.WriteLine($"{factorial.FindFactorialIterative(11)}");
+// Console.WriteLine($"{factorial.FindFactorialRecursive(11)}");
+
+FibonacciSeries series = new FibonacciSeries();
+Console.WriteLine($"{series.FibSeries(6, "main")}");
